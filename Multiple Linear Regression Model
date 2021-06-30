@@ -1,1 +1,84 @@
+#### Uploading Packages #####
+
+pacman::p_load(pacman,tidyr,ggthemes,ggplot2,plotly,GGally,rio,stringr,shiny,rmarkdown,lubridate,psych,ipred,caret,ROCR,pROC,DT,dummies,rpart,rpart.plot,httr,randomForest,readr,doParallel,xgboost,truncnorm,DMwR);
+library(tidyverse);
+library("ggpubr");
+library(MASS);
+library(fastDummies);
+
+#### Reading the Data ####
+
+train<-read.csv("../input/house-prices-advanced-regression-techniques/train.csv");
+test<-read.csv("../input/house-prices-advanced-regression-techniques/test.csv");
+final<-read.csv("../input/house-prices-advanced-regression-techniques/sample_submission.csv");
+
+
+#### Visualizing the Prices ####
+
+set.seed(1992);
+theme_set(theme_bw() +theme(legend.position = "top"));
+Target=function(txt) 
+{
+ds=ggplot(train,aes(SalePrice))+ geom_histogram(color='black',fill=txt,bins = 80) ;
+bxp=ggplot(train,aes(SalePrice))+ geom_boxplot(color='black',fill=txt) ;
+qq= ggplot(train, aes(sample=SalePrice))+ stat_qq() + stat_qq_line() ;
+ggarrange(ds, qq, bxp,labels = c("1", "2", "3"),ncol = 2, nrow = 2);
+}
+Target('pink');
+train<-read.csv("../input/house-prices-advanced-regression-techniques/train.csv");
+train=train%>%filter(SalePrice>7e5); 
+train$SalePrice=log(train$SalePrice); 
+Target1=function(txt) 
+{
+dp=ggplot(train,aes(SalePrice))+ geom_histogram(color='black',fill=txt,bins = 80); 
+bxp=ggplot(train,aes(SalePrice))+ geom_boxplot(color='black',fill=txt);
+qq= ggplot(train, aes(sample=SalePrice))+ stat_qq() + stat_qq_line(); 
+ggarrange(dp, qq, bxp,labels = c("1", "2", "3"),ncol = 2, nrow = 2);
+}
+Target1('red');
+set.seed(1992);
+train<-read.csv("../input/house-prices-advanced-regression-techniques/train.csv");
+train=train%>%filter(SalePrice>1e5&SalePrice<=5e5); 
+train$SalePrice=log(train$SalePrice); 
+Target2=function(txt) 
+{
+dz=ggplot(train,aes(SalePrice)) + geom_histogram(color='black',fill=txt,bins = 80); 
+bxp=ggplot(train,aes(SalePrice)) + geom_boxplot(color='black',fill=txt); 
+qq= ggplot(train, aes(sample=SalePrice))+ stat_qq() + stat_qq_line(); 
+ggarrange(dz, qq, bxp,labels = c("1", "2", "3"),ncol = 2, nrow = 2);
+}
+Target2('blue');
+set.seed(1992);
+train<-read.csv("../input/house-prices-advanced-regression-techniques/train.csv");
+Target3=function(txt) 
+{
+ds=ggplot(train,aes(SalePrice))+geom_histogram(color='black',fill=txt,bins = 80);
+bxp=ggplot(train,aes(SalePrice))+geom_boxplot(color='black',fill=txt);
+qq= ggplot(train, aes(sample=SalePrice))+stat_qq() + stat_qq_line() ;
+ggarrange(ds, qq, bxp,labels = c("1", "2", "3"),ncol = 2, nrow = 2);
+}
+Target3('green');
+
+
+##### DATA EXPLORATION ####
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
