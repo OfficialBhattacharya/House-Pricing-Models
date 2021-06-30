@@ -60,7 +60,7 @@ ggarrange(ds, qq, bxp,labels = c("1", "2", "3"),ncol = 2, nrow = 2);
 Target3('green');
 
 
-##### DATA EXPLORATION ####
+##### Data Exploration ####
 
 
 
